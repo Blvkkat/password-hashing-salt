@@ -1,0 +1,32 @@
+"""
+Author: Brandon Heck
+Assignment: Hashing Passwords
+Date: 2025-03-05
+Description: This program securely hashes a user-provided password 
+             using bcrypt, a password hashing function with built-in salting.
+             
+Inputs:
+  - User-entered password as a string.
+
+Outputs:
+  - The original password entered.
+  - The hashed password in hexadecimal format.
+
+Sources:
+  - bcrypt library documentation: https://pypi.org/project/bcrypt/
+"""
+
+import bcrypt
+
+def hash_password(password: str) -> str:
+    """Hashes a password using bcrypt with an automatically generated salt."""
+    salt = bcrypt.gensalt()  # Generate a unique salt
+    hashed_password = bcrypt.hashpw(password.encode(), salt)  # Hash password
+    return hashed_password.hex()  # Convert to hex representation
+
+if __name__ == "__main__":
+    user_password = input("Enter a password: ")  # Take user input
+    hashed_output = hash_password(user_password)
+
+    print("\nOriginal Password:", user_password)
+    print("Hashed Password (Hex):", hashed_output)
